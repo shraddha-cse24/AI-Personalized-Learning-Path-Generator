@@ -1,0 +1,7 @@
+numpy>=1.26,<2.2
+pandas>=2.0
+scipy
+joblib
+scikit-learn==1.6.1
+pytest
+# scikit-learn MUST be 1.6.1 (Member 2's version) or the .joblib model will not load.

@@ -1,0 +1,155 @@
+{
+  "means": {
+    "adaptive": {
+      "mean_theta_gain_touched": 0.3586587733755891,
+      "total_theta_gain": 8.906499609933974,
+      "topics_newly_learned": 4.55,
+      "weak_topics_start": 69.25,
+      "weak_topics_improved": 2.075,
+      "distinct_topics": 25.575,
+      "repeat_rate": 0.026500000000000003,
+      "gate_violation_rate": 0.0,
+      "frustrating_rate(p<0.4)": 0.014500000000000002,
+      "too_easy_rate(p>0.9)": 0.22016666666666668,
+      "observed_correct_rate": 0.7889999999999999
+    },
+    "fixed_sequence": {
+      "mean_theta_gain_touched": 0.40847742975274637,
+      "total_theta_gain": 8.169548595054929,
+      "topics_newly_learned": 4.55,
+      "weak_topics_start": 69.25,
+      "weak_topics_improved": 1.825,
+      "distinct_topics": 20.0,
+      "repeat_rate": 0.0,
+      "gate_violation_rate": 0.0,
+      "frustrating_rate(p<0.4)": 0.02016666666666667,
+      "too_easy_rate(p>0.9)": 0.263,
+      "observed_correct_rate": 0.8181666666666667
+    },
+    "random": {
+      "mean_theta_gain_touched": 0.11713096882209047,
+      "total_theta_gain": 11.100059045902807,
+      "topics_newly_learned": 1.825,
+      "weak_topics_start": 69.25,
+      "weak_topics_improved": 1.125,
+      "distinct_topics": 94.975,
+      "repeat_rate": 0.05466666666666666,
+      "gate_violation_rate": 0.8043333333333333,
+      "frustrating_rate(p<0.4)": 0.13566666666666666,
+      "too_easy_rate(p>0.9)": 0.09433333333333334,
+      "observed_correct_rate": 0.6573333333333333
+    }
+  },
+  "paired_differences": {
+    "adaptive - fixed_sequence | mean_theta_gain_touched": [
+      -0.0498186563771573,
+      -0.060984273768461134,
+      -0.03619655993017833
+    ],
+    "adaptive - fixed_sequence | total_theta_gain": [
+      0.7369510148790456,
+      0.5699313760150043,
+      0.8951966976914472
+    ],
+    "adaptive - fixed_sequence | topics_newly_learned": [
+      0.0,
+      -0.55,
+      0.55
+    ],
+    "adaptive - fixed_sequence | weak_topics_start": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "adaptive - fixed_sequence | weak_topics_improved": [
+      0.25,
+      -0.025,
+      0.5
+    ],
+    "adaptive - fixed_sequence | distinct_topics": [
+      5.575,
+      4.775,
+      6.325
+    ],
+    "adaptive - fixed_sequence | repeat_rate": [
+      0.026500000000000003,
+      0.014333333333333332,
+      0.04300833333333329
+    ],
+    "adaptive - fixed_sequence | gate_violation_rate": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "adaptive - fixed_sequence | frustrating_rate(p<0.4)": [
+      -0.005666666666666668,
+      -0.028833333333333332,
+      0.007670833333333311
+    ],
+    "adaptive - fixed_sequence | too_easy_rate(p>0.9)": [
+      -0.04283333333333335,
+      -0.06250416666666668,
+      -0.024166666666666673
+    ],
+    "adaptive - fixed_sequence | observed_correct_rate": [
+      -0.029166666666666657,
+      -0.040337500000000005,
+      -0.015833333333333345
+    ],
+    "adaptive - random | mean_theta_gain_touched": [
+      0.24152780455349862,
+      0.21192014867546732,
+      0.2765618781866822
+    ],
+    "adaptive - random | total_theta_gain": [
+      -2.193559435968834,
+      -2.5320282763912507,
+      -1.7131684057601075
+    ],
+    "adaptive - random | topics_newly_learned": [
+      2.725,
+      1.9993750000000001,
+      3.55
+    ],
+    "adaptive - random | weak_topics_start": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "adaptive - random | weak_topics_improved": [
+      0.95,
+      0.15,
+      1.925
+    ],
+    "adaptive - random | distinct_topics": [
+      -69.4,
+      -70.8,
+      -68.0
+    ],
+    "adaptive - random | repeat_rate": [
+      -0.028166666666666663,
+      -0.03983333333333333,
+      -0.013833333333333331
+    ],
+    "adaptive - random | gate_violation_rate": [
+      -0.8043333333333333,
+      -0.8146666666666667,
+      -0.7946666666666667
+    ],
+    "adaptive - random | frustrating_rate(p<0.4)": [
+      -0.12116666666666667,
+      -0.15899999999999997,
+      -0.0873291666666667
+    ],
+    "adaptive - random | too_easy_rate(p>0.9)": [
+      0.12583333333333332,
+      0.10483333333333333,
+      0.14683749999999995
+    ],
+    "adaptive - random | observed_correct_rate": [
+      0.13166666666666665,
+      0.11550000000000002,
+      0.1481708333333333
+    ]
+  }
+}
