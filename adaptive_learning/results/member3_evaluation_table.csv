@@ -1,0 +1,12 @@
+,Adaptive,Fixed sequence,Random
+mean_theta_gain_touched,0.359,0.408,0.117
+total_theta_gain,8.906,8.17,11.1
+topics_newly_learned,4.55,4.55,1.825
+weak_topics_start,69.25,69.25,69.25
+weak_topics_improved,2.075,1.825,1.125
+distinct_topics,25.575,20.0,94.975
+repeat_rate,0.027,0.0,0.055
+gate_violation_rate,0.0,0.0,0.804
+frustrating_rate(p<0.4),0.015,0.02,0.136
+too_easy_rate(p>0.9),0.22,0.263,0.094
+observed_correct_rate,0.789,0.818,0.657
