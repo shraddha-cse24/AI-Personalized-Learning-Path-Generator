@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Lexend", system-ui, sans-serif;
+  --color-ink: #1b2540;
+  --color-paper: #f6f7fb;
+  --color-line: #dfe3ee;
+  --color-brand: #2f4bd8;
+  --color-weak: #c2410c;
+  --color-learning: #b7791f;
+  --color-good: #15803d;
+  --color-new: #64748b;
+}
+body { background: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); }
+:focus-visible { outline: 3px solid var(--color-brand); outline-offset: 2px; }
