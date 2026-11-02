@@ -4,7 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Onboarding from "./pages/Onboarding";
-import Assessment from "./pages/Assessment";
+import Practice from "./pages/Practice";
 import LearningPath from "./pages/LearningPath";
 import Dashboard from "./pages/Dashboard";
 
@@ -13,7 +13,6 @@ const nav = ({ isActive }) => (isActive ? "font-semibold text-brand" : "text-new
 export default function App() {
   const { user, logout } = useAuth();
   const go = useNavigate();
-  const P = ({ children }) => <ProtectedRoute>{children}</ProtectedRoute>;
 
   return (
     <>
@@ -23,6 +22,7 @@ export default function App() {
           <div className="flex items-center gap-5 text-sm">
             {user ? (
               <>
+                <NavLink to="/practice" className={nav}>Practice</NavLink>
                 <NavLink to="/path" className={nav}>My path</NavLink>
                 <NavLink to="/dashboard" className={nav}>Progress</NavLink>
                 <button onClick={() => { logout(); go("/"); }} className="text-new hover:text-ink">Log out ({user.name})</button>
@@ -41,10 +41,10 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Auth mode="login" />} />
           <Route path="/register" element={<Auth mode="register" />} />
-          <Route path="/start" element={<P><Onboarding /></P>} />
-          <Route path="/assessment" element={<P><Assessment /></P>} />
-          <Route path="/path" element={<P><LearningPath /></P>} />
-          <Route path="/dashboard" element={<P><Dashboard /></P>} />
+          <Route path="/start" element={<ProtectedRoute><Onboarding /></ProtectedRoute>} />
+          <Route path="/practice" element={<ProtectedRoute><Practice /></ProtectedRoute>} />
+          <Route path="/path" element={<ProtectedRoute><LearningPath /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         </Routes>
       </main>
     </>

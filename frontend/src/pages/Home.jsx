@@ -1,20 +1,35 @@
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { Card } from "../components/ui";
+
+const steps = [
+  ["Choose your starting level", "Beginner or intermediate, so you don't repeat what you already know."],
+  ["Practise exercises picked for you", "Each one is chosen so it's challenging but within reach, using a model trained on real student data."],
+  ["Watch your path adapt", "Weak topics come back for revision, strong topics move on, and new topics unlock as you master the basics."],
+];
 
 export default function Home() {
+  const { user, profile } = useAuth();
   return (
-    <section className="py-10">
-      <h1 className="max-w-2xl text-4xl font-bold leading-tight">Learn what you actually need next.</h1>
-      <p className="mt-4 max-w-xl text-lg text-new">
-        Answer a few questions. We find the topics you're ready for and the ones that need another look, then put them in the right order.
-      </p>
-      <Link to="/start" className="mt-8 inline-block rounded-md bg-brand px-6 py-3 font-medium text-white hover:opacity-90">Build my learning path</Link>
-      <ol className="mt-14 grid gap-4 sm:grid-cols-3">
-        {[["Tell us your goal", "Pick what you want to learn."], ["Take a short quiz", "We measure what you already know."], ["Follow your path", "Topics are ordered by what helps you most, and update as you improve."]].map(([t, d], i) => (
-          <li key={t} className="rounded-lg border border-line bg-white p-5">
-            <p className="font-semibold">{i + 1}. {t}</p><p className="mt-1 text-sm text-new">{d}</p>
-          </li>
+    <>
+      <section className="py-8 sm:py-14">
+        <p className="text-sm font-medium text-brand">Adaptive mathematics learning</p>
+        <h1 className="mt-3 max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">Practise what you actually need next.</h1>
+        <p className="mt-5 max-w-xl text-lg text-new">
+          Every answer you give updates your learning path. Topics you struggle with get revisited, and topics you've mastered get left behind. Currently covers school mathematics, using real student data from Junyi Academy.
+        </p>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link to={user ? (profile?.onboarding_completed ? "/practice" : "/start") : "/register"} className="rounded-md bg-brand px-6 py-3 font-medium text-white hover:opacity-90">
+            {user ? "Continue learning" : "Create a free account"}
+          </Link>
+          {!user && <Link to="/login" className="rounded-md border border-line bg-white px-6 py-3 font-medium hover:bg-paper">Log in</Link>}
+        </div>
+      </section>
+      <ol className="grid gap-4 sm:grid-cols-3">
+        {steps.map(([t, d], i) => (
+          <li key={t}><Card className="h-full"><p className="text-sm font-semibold text-brand">Step {i + 1}</p><p className="mt-1 font-semibold">{t}</p><p className="mt-1 text-sm text-new">{d}</p></Card></li>
         ))}
       </ol>
-    </section>
+    </>
   );
 }

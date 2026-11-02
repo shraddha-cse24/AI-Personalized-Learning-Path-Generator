@@ -1,51 +1,39 @@
-import { mockLearningPath } from "../data/mockData";
+const BASE = import.meta.env.VITE_API_URL || "http://localhost:8000";
+let onUnauthorized = () => {};
+export const setUnauthorizedHandler = (fn) => { onUnauthorized = fn; };
+export const getToken = () => localStorage.getItem("token");
 
-const USE_MOCK = true; // set to false when the backend is ready
-const API_BASE_URL = "http://localhost:8000"; // confirm with your backend teammate
+function messageFrom(detail) {
+  if (typeof detail === "string") return detail;
+  if (Array.isArray(detail) && detail[0]?.msg) return detail[0].msg.replace(/^Value error, /, "");
+  return "Please check what you entered and try again.";
+}
 
-async function request(path, options) {
-  const res = await fetch(`${API_BASE_URL}${path}`, options);
-  if (!res.ok) throw new Error(`Request failed (${res.status})`);
+async function request(path, options = {}) {
+  let res;
+  try {
+    res = await fetch(BASE + path, {
+      ...options,
+      headers: { "Content-Type": "application/json", ...(getToken() ? { Authorization: `Bearer ${getToken()}` } : {}) },
+    });
+  } catch {
+    throw new Error(`Can't reach the server at ${BASE}. Is the backend running?`);
+  }
+  if (res.status === 401 && getToken()) onUnauthorized();
+  if (!res.ok) throw new Error(messageFrom((await res.json().catch(() => ({}))).detail));
   return res.json();
 }
+const send = (method, path, body) => request(path, { method, body: JSON.stringify(body) });
 
-export async function submitAttempt(studentId, ucid, isCorrect) {
-  if (USE_MOCK) return { ok: true };
-  return request("/attempts", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ student_id: studentId, ucid, is_correct: isCorrect }),
-  });
-}
+// Auth -> { id, name, email, access_token }
+export const register = (name, email, password) => send("POST", "/auth/register", { name, email, password });
+export const login = (email, password) => send("POST", "/auth/login", { email, password });
+export const getMe = () => request("/auth/me");
 
-export async function getLearningPath(studentId) {
-  if (USE_MOCK) return { steps: mockLearningPath };
-  return request(`/students/${studentId}/path`);
-}
-
-export async function getMastery(studentId) {
-  if (USE_MOCK) return { topics: mockLearningPath };
-  return request(`/students/${studentId}/mastery`);
-}
-
-// ---- Auth. Confirm endpoint names and response shape with the backend teammate ----
-export async function register(name, email, password) {
-  if (USE_MOCK) {
-    const users = JSON.parse(localStorage.getItem("mockUsers") || "[]");
-    if (users.some((u) => u.email === email)) throw new Error("An account with this email already exists. Log in instead.");
-    const u = { id: "stu" + (users.length + 1), name, email, password };
-    localStorage.setItem("mockUsers", JSON.stringify([...users, u]));
-    return { id: u.id, name, email };
-  }
-  return request("/auth/register", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name, email, password }) });
-}
-
-export async function login(email, password) {
-  if (USE_MOCK) {
-    const users = JSON.parse(localStorage.getItem("mockUsers") || "[]");
-    const u = users.find((x) => x.email === email && x.password === password);
-    if (!u) throw new Error("Email or password is incorrect.");
-    return { id: u.id, name: u.name, email };
-  }
-  return request("/auth/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, password }) });
-}
+// Student data
+export const getProfile = () => request("/students/me/profile");
+export const updateProfile = (selected_subject, learning_level) => send("PUT", "/students/me/profile", { selected_subject, learning_level });
+export const getLearningPath = () => request("/students/me/path?n_steps=6&exercises_per_step=3");
+export const getNextExercises = (k = 3, conceptCode) => request(`/students/me/next-exercises?k=${k}${conceptCode ? `&concept_code=${conceptCode}` : ""}`);
+export const getMastery = () => request("/students/me/mastery");
+export const submitAttempt = (ucid, is_correct) => send("POST", "/attempts", { ucid, is_correct });
