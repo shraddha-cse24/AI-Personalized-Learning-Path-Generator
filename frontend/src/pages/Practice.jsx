@@ -21,7 +21,7 @@ export default function Practice() {
     try {
       await submitAttempt(ex.ucid, correct);
       setCount((c) => c + 1);
-      setFlash(correct 
+      setFlash(correct
         ? { text: "✓ Nice! Your answer was recorded and your path has been updated.", type: "good" }
         : { text: "✓ Noted. This topic was marked for revision in your path.", type: "weak" }
       );
@@ -50,6 +50,34 @@ export default function Practice() {
         </div>
         <p className="text-sm font-medium text-new">{count} answered this session</p>
       </div>
+
+      <details open={count === 0} className="mt-4 rounded-xl border border-line bg-white p-4 text-sm">
+        <summary className="cursor-pointer font-semibold">How practice works</summary>
+        <p className="mt-3 text-new">
+          We tell you a <strong className="text-ink">topic and difficulty</strong>. The dataset doesn't include question text, so pick a matching problem
+          from your textbook, worksheet or teacher, solve it, then report honestly how it went.
+        </p>
+        <div className="mt-3 grid gap-4 sm:grid-cols-2">
+          <div>
+            <p className="font-medium text-good">Do</p>
+            <ul className="mt-1 list-disc space-y-1 pl-5">
+              <li>Solve it on paper, on your own, first.</li>
+              <li>Choose "right" only if you got it correct without looking at the answer.</li>
+              <li>Choose "wrong" if you were unsure, ran out of time or needed a hint.</li>
+              <li>Expect to get some wrong. That is how the path finds what to revise.</li>
+            </ul>
+          </div>
+          <div>
+            <p className="font-medium text-weak">Don't</p>
+            <ul className="mt-1 list-disc space-y-1 pl-5">
+              <li>Don't tap "right" to move on faster. It makes later exercises too hard.</li>
+              <li>Don't skip exercises you find hard. Wrong answers are useful.</li>
+              <li>Don't treat the chance-of-success figure as a grade. It is a model estimate.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
       {flash && (
         <div role="status" className={`mt-3 flex items-center justify-between rounded-lg p-3 text-sm ${flash.type === 'good' ? 'bg-good/10 text-good border border-good/20' : 'bg-weak/10 text-weak border border-weak/20'}`}>
           <span>{flash.text}</span>
@@ -57,6 +85,7 @@ export default function Practice() {
         </div>
       )}
       {error && <div className="mt-4"><ErrorBox message={error} /></div>}
+
       {ex ? (
         <Card className="mt-5">
           <div className="flex items-center justify-between">
@@ -70,8 +99,7 @@ export default function Practice() {
             <strong className="rounded bg-paper px-2 py-0.5 text-ink font-semibold">{pct(ex.predicted_p_correct)}%</strong>
           </div>
           <div className="mt-5 rounded-lg border border-line/60 bg-paper p-4 text-sm text-ink/80">
-            <p className="font-medium text-ink">Instructions:</p>
-            <p className="mt-1">Work this exercise out on your own. Then self-report your result below — our recommendation model uses your accuracy to immediately rebalance your path.</p>
+            Find a problem on this topic at this difficulty, solve it on your own, then tell us how it went. Your answer decides what comes next.
           </div>
           <div className="mt-5 grid grid-cols-2 gap-3">
             <button
@@ -99,6 +127,7 @@ export default function Practice() {
           </Link>
         </Card>
       )}
+
       <div className="mt-6 flex items-center justify-between text-sm">
         <Link to="/path" className="text-brand underline">← Back to learning path</Link>
         <Link to="/dashboard" className="text-new hover:text-ink">View progress & analytics →</Link>

@@ -6,9 +6,8 @@ import { AVAILABLE_SUBJECTS, SUBJECTS } from "../config/subjects";
 import { ErrorBox } from "../components/ui";
 
 const LEVELS = [
-  ["beginner", "Beginner", "Start from the basics: counting, number sense, simple operations."],
-  ["intermediate", "Intermediate", "I'm comfortable with elementary maths and want to move on."],
-  ["advanced", "Advanced", "I've covered most of the junior-level material already."],
+  ["beginner", "Primary school maths", "Grades 1–6, about ages 6–12. Numbers and operations, geometry and measurement, tables and graphs, word problems."],
+  ["intermediate", "Middle school maths", "Grades 7–9, about ages 12–15. Algebra and functions, geometry, ratios and radicals, statistics and probability."],
 ];
 
 export default function Onboarding() {
@@ -39,7 +38,7 @@ export default function Onboarding() {
         <span className="mt-1 block text-xs font-normal text-new">Computer science tracks need their own exercise data and model, so they're not available yet.</span>
       </label>
       <fieldset>
-        <legend className="text-sm font-medium">Where should we start?</legend>
+        <legend className="text-sm font-medium">Which maths level are you working at?</legend>
         <div className="mt-2 space-y-3">
           {LEVELS.map(([id, title, desc]) => (
             <label key={id} className={`block cursor-pointer rounded-xl border p-4 ${level === id ? "border-brand bg-brand/5" : "border-line bg-white hover:bg-paper"}`}>
@@ -49,6 +48,10 @@ export default function Onboarding() {
           ))}
         </div>
       </fieldset>
+      <p className="rounded-lg bg-paper p-3 text-xs text-new">
+        Based on Taiwan's school curriculum (Junyi Academy). Choosing middle school unlocks more topics sooner, but your first exercises may still
+        start from foundations until the system sees you've mastered them.
+      </p>
       {error && <ErrorBox message={error} />}
       <button disabled={busy} className="w-full rounded-md bg-brand py-3 font-medium text-white disabled:opacity-50">{busy ? "Saving…" : "Start practising"}</button>
     </form>

@@ -16,7 +16,7 @@ export default function Home() {
         <p className="text-sm font-medium text-brand">Adaptive mathematics learning</p>
         <h1 className="mt-3 max-w-2xl text-4xl font-bold leading-tight sm:text-5xl">Practise what you actually need next.</h1>
         <p className="mt-5 max-w-xl text-lg text-new">
-          Every answer you give updates your learning path. Topics you struggle with get revisited, and topics you've mastered get left behind. Currently covers school mathematics, using real student data from Junyi Academy.
+          Every answer you give updates your learning path. Topics you struggle with get revisited, and topics you've mastered get left behind. Covers school mathematics for Grades 1–9 (about ages 6–15), using real student data from Junyi Academy.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link to={user ? (profile?.onboarding_completed ? "/practice" : "/start") : "/register"} className="rounded-md bg-brand px-6 py-3 font-medium text-white hover:opacity-90">
